@@ -64,7 +64,10 @@ void readIRValue() {
 }
 
 void readLaser() {
-
+  lox1.rangingTest(&measure1, false);
+  lox2.rangingTest(&measure2, false);
+  dataLox1 = measure1.RangeMilliMeter();
+  dataLox2 = measure2.RangeMilliMeter();
 }
 
 

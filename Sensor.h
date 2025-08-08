@@ -10,9 +10,11 @@
 #define pinLox2 25
 
 extern int IR[4];
+
+extern VL53L0X_RangingMeasurementData_t measure1;
+extern VL53L0X_RangingMeasurementData_t measure2;
 extern int dataLox1;
 extern int dataLox2;
-
 extern Adafruit_VL53L0X lox1;
 extern Adafruit_VL53L0X lox2;
 
