@@ -1,10 +1,20 @@
+#include "Sensor.h"
 #include "esp32-hal.h"
 #include "esp32-hal-adc.h"
-#include "Sensor.h"
-#include "Adafruit_VL53L0X.h"
 
 
 int IR[4];
+Adafruit_VL53L0X lox1;
+Adafruit_VL53L0X lox2;
+VL53L0X_RangingMeasurementData_t measure1;
+VL53L0X_RangingMeasurementData_t measure2;
+int rightLaser;
+int frontLaser;
+
+void initSerial() {
+  HardwareSerial SerialPort(2); // Use UART2
+  SerialPort.begin(115200, SERIAL_8N1, 16, 17); 
+}
 
 int initLaser() {
   Wire.begin(I2C_SDA, I2C_SCL);
@@ -12,9 +22,13 @@ int initLaser() {
   lox2 = Adafruit_VL53L0X();
   delay(10);
 
+  pinMode(pinLox1, OUTPUT);
+  pinMode(pinLox2, OUTPUT);
+
   digitalWrite(pinLox1, LOW);
   digitalWrite(pinLox2, LOW);
   delay(10);
+  // Reset pin
 
   digitalWrite(pinLox1, HIGH);
   digitalWrite(pinLox2, HIGH);
@@ -35,7 +49,7 @@ int initLaser() {
   }
 }
 
-void readIRValue() {
+void readIrValue() {
   if(analogRead(35) < 2500) {
     IR[0] = 0;
   }
@@ -63,11 +77,11 @@ void readIRValue() {
   delayMicroseconds(200);
 }
 
-void readLaser() {
+void readLaserValue() {
   lox1.rangingTest(&measure1, false);
   lox2.rangingTest(&measure2, false);
-  dataLox1 = measure1.RangeMilliMeter();
-  dataLox2 = measure2.RangeMilliMeter();
+  rightLaser = measure1.RangeMilliMeter;
+  frontLaser = measure2.RangeMilliMeter;
 }
 
 
