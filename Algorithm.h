@@ -1,4 +1,3 @@
-#include <Arduino.h>
 #include "Sensor.h"
 
 #define rightWallSet 100

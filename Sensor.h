@@ -1,14 +1,11 @@
 #include "Adafruit_VL53L0X.h"
-#include <Wire.h>
-#include <Arduino.h>
-#include <HardwareSerial.h>
 
-#define I2C_SDA 16 
-#define I2C_SCL 17 
-#define address1 0x30
-#define address2 0x31
-#define pinLox1 26
-#define pinLox2 25
+#define I2C_SDA 33
+#define I2C_SCL 32 
+#define address1 0x30 // front
+#define address2 0x32 // right
+#define pinLox1 5  // front
+#define pinLox2 17 // right
 
 extern int IR[4];
 
@@ -19,8 +16,7 @@ extern int frontLaser;
 extern Adafruit_VL53L0X lox1;
 extern Adafruit_VL53L0X lox2;
 
-extern int initLaser();
-void initSerial();
+void initLaser();
 void initImu();
 
 void readLaserValue();

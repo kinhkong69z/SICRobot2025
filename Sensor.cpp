@@ -4,49 +4,34 @@
 
 
 int IR[4];
-Adafruit_VL53L0X lox1;
-Adafruit_VL53L0X lox2;
+Adafruit_VL53L0X lox1 = Adafruit_VL53L0X();
+Adafruit_VL53L0X lox2 = Adafruit_VL53L0X();
 VL53L0X_RangingMeasurementData_t measure1;
 VL53L0X_RangingMeasurementData_t measure2;
 int rightLaser;
 int frontLaser;
 
-void initSerial() {
-  HardwareSerial SerialPort(2); // Use UART2
-  SerialPort.begin(115200, SERIAL_8N1, 16, 17); 
-}
+bool laser1_ok = false;
+bool laser2_ok = false;
 
-int initLaser() {
-  Wire.begin(I2C_SDA, I2C_SCL);
-  lox1 = Adafruit_VL53L0X();
-  lox2 = Adafruit_VL53L0X();
-  delay(10);
-
-  pinMode(pinLox1, OUTPUT);
-  pinMode(pinLox2, OUTPUT);
-
+void initLaser() {
+  // Tắt cả 2 cảm biến
   digitalWrite(pinLox1, LOW);
   digitalWrite(pinLox2, LOW);
   delay(10);
-  // Reset pin
 
-  digitalWrite(pinLox1, HIGH);
-  digitalWrite(pinLox2, HIGH);
-  delay(10);
-
+  // Bật cảm biến 1 trước
   digitalWrite(pinLox1, HIGH);
   digitalWrite(pinLox2, LOW);
+  delay(10);
+  
+  lox1.begin(address1);
 
-  if(!lox1.begin(address1)) {
-    return 0;
-  }
+  // Bật cảm biến 2
+  digitalWrite(pinLox2, HIGH);
   delay(10);
 
-  digitalWrite(pinLox2, HIGH);
-
-  if(!lox2.begin(address2)) {
-    return 0;
-  }
+  lox2.begin(address2);
 }
 
 void readIrValue() {
