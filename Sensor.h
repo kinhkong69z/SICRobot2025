@@ -4,10 +4,11 @@
 #define I2C_SCL 32 
 #define address1 0x30 // front
 #define address2 0x32 // right
-#define pinLox1 5  // front
-#define pinLox2 17 // right
+#define pinLox1 12  // front
+#define pinLox2 13 // right
 
-extern int IR[4];
+
+extern int IR[5];
 
 extern VL53L0X_RangingMeasurementData_t measure1;
 extern VL53L0X_RangingMeasurementData_t measure2;

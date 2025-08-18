@@ -3,7 +3,7 @@
 #include "esp32-hal-adc.h"
 
 
-int IR[4];
+int IR[5];
 Adafruit_VL53L0X lox1 = Adafruit_VL53L0X();
 Adafruit_VL53L0X lox2 = Adafruit_VL53L0X();
 VL53L0X_RangingMeasurementData_t measure1;
@@ -35,31 +35,50 @@ void initLaser() {
 }
 
 void readIrValue() {
-  if(analogRead(35) < 2500) {
+  if(analogRead(35) < 1500) {
     IR[0] = 0;
   }
   else {
     IR[0] = 1;
   }
-  if(analogRead(34) < 2000) {
+  if(analogRead(34) < 1500) {
     IR[1] = 0;
   }
   else {
     IR[1] = 1;
   }
-  if(analogRead(39) < 2500) {
+  if(analogRead(39) < 1500) {
     IR[2] = 0;
   }
   else {
     IR[2] = 1;
   }
-  if(analogRead(36) < 2500) {
+  if(analogRead(36) < 1500) {
     IR[3] = 0;
   }
   else {
     IR[3] = 1;
   }
+  if(analogRead(25) < 1500) {
+    IR[4] = 0;
+  }
+  else {
+    IR[4] = 1;
+  }
+  if(analogRead(26) < 1500) {
+    IR[4] = 0;
+  }
+  else {
+    IR[4] = 1;
+  }
+  if(analogRead(27) < 1500) {
+    IR[5] = 0;
+  }
+  else {
+    IR[5] = 1;
+  }
   delayMicroseconds(200);
+  
 }
 
 void readLaserValue() {
