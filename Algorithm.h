@@ -10,6 +10,7 @@ extern int rightWallCheck();
 extern int frontWallCheck();
 extern int irCheck();
 
+void setMotor(int left, int right);
 void goToHill();
 void inHill();
 void goToConer();
